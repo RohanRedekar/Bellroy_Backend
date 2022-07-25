@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const WalletSchema = new mongoose.Schema(
+const ProductSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
     subtitle: { type: String, required: false },
@@ -21,4 +21,4 @@ const WalletSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("wallet", WalletSchema);
+module.exports = mongoose.model("product", ProductSchema);
