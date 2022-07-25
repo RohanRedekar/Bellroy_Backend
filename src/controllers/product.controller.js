@@ -9,7 +9,7 @@ const Travel = require("../models/travel.model");
 router.get("/:title", async (req, res) => {
   try {
     const title = req.params.title.split("-").join(" ");
-    switch (req.params.producttype) {
+    switch (req.params.title) {
       case "Wallets":
         const wallet = await Wallet.find({ title: title });
         return res.status(201).send(wallet);
