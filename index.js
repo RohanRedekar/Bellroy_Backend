@@ -3,6 +3,7 @@ const app = express();
 app.use(express.json());
 const cors = require("cors");
 const productsController = require("./src/controllers/products.controller");
+const productController = require("./src/controllers/product.controller");
 
 app.use(cors());
 app.get("", (req, res) => {
@@ -14,5 +15,6 @@ app.get("", (req, res) => {
 });
 
 app.use("/products/category", productsController);
+app.use("/product", productController)
 
 module.exports = app;
