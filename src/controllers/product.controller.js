@@ -6,10 +6,10 @@ const Bag = require("../models/bag.model");
 const Tech = require("../models/tech.model");
 const Travel = require("../models/travel.model");
 
-router.get("/:title", async (req, res) => {
+router.get("/:category/:title", async (req, res) => {
   try {
     const title = req.params.title.split("-").join(" ");
-    switch (req.params.title) {
+    switch (req.params.category) {
       case "Wallets":
         const wallet = await Wallet.find({ title: title });
         return res.status(201).send(wallet);
