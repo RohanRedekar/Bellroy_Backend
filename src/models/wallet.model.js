@@ -10,7 +10,7 @@ const WalletSchema = new mongoose.Schema(
     colouredWalletImages: [{ type: String, required: true }],
     colors: [{ type: String, required: true }],
     description: { type: String, required: true },
-    detailedImages: [{ type: Array, required: true }],
+    detailedImages: { type: Object, required: true },
     fullImage: { type: String, required: false },
     pointers: [{ type: String, required: true }],
     specifications: [{ type: String, required: true }],
