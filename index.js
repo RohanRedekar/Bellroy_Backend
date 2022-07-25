@@ -14,7 +14,7 @@ app.get("", (req, res) => {
     }
 });
 
-app.use("/products/category", productsController);
+app.use("/products", productsController);
 app.use("/product", productController)
 
 module.exports = app;
