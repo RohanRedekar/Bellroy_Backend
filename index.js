@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 const cors = require("cors");
-const walletController = require("./src/controllers/wallet.controller");
+const productsController = require("./src/controllers/products.controller");
 
 app.use(cors());
 app.get("", (req, res) => {
@@ -13,6 +13,6 @@ app.get("", (req, res) => {
     }
 });
 
-app.use("/wallets", walletController);
+app.use("/products/category", productsController);
 
 module.exports = app;
