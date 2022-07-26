@@ -3,6 +3,7 @@ const User = require("../models/user.model");
 const register = async (req, res) => {
   try {
     const ip = req.ip;
+    console.log(ip);
     let user = await User.findOne({ ip_adress: ip });
 
     if (user) {
