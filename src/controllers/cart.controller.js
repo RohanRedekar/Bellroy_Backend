@@ -1,14 +1,14 @@
 const User = require("../models/user.model");
 
 const addToCart = (req, res, next) => {
-  User.findOne({ ip_adress: ip })
-    .then((dbUser) => {
-      dbUser.addToCart(req.body.id);
-    })
-    .then(() => {
-      return res.status(201).send("added to cart successfully");
-    })
-    .catch((err) => console.log(err));
+  const user = User.findOne({ ip_adress: ip }).lean().exec();
+  return res.status(201).send(user);
+    // .then((dbUser) => {
+    //   dbUser.addToCart(req.body.id);
+    // })
+    // .then(() => {
+    //   return res.status(201).send("added to cart successfully");
+    // })
 };
 
 const getCart = (req, res, next) => {
