@@ -10,6 +10,7 @@ const {
   getCart,
   deleteInCart,
 } = require("./src/controllers/cart.controller");
+const User = require("./src/models/user.model");
 
 app.use(cors());
 
@@ -19,6 +20,16 @@ app.get("", (req, res) => {
   } catch (error) {
     res.send(error);
   }
+});
+
+app.use((req, res, next) => {
+  const ip = req.ip;
+  User.findOne({ ip_adress: ip })
+    .then((userInDB) => {
+      req.user = userInDB;
+      next();
+    })
+    .catch((err) => console.log(err));
 });
 
 app.use("/products", productsController);
