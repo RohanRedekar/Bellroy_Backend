@@ -1,5 +1,10 @@
+const User = require("../models/user.model");
+
 const addToCart = (req, res, next) => {
-  req.user.addToCart(req.body.id)
+  User.findOne({ ip_adress: ip })
+    .then((dbUser) => {
+      dbUser.addToCart(req.body.id);
+    })
     .then(() => {
       return res.status(201).send("added to cart successfully");
     })

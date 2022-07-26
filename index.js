@@ -22,17 +22,17 @@ app.get("", (req, res) => {
   }
 });
 
-app.use((req, res, next) => {
-  try {
-    const ip = req.ip;
-    User.findOne({ ip_adress: ip }).then((userInDB) => {
-      req.user = userInDB;
-      next();
-    });
-  } catch (err) {
-    return res.status(500).send(err);
-  }
-});
+// app.use((req, res, next) => {
+//   try {
+//     const ip = req.ip;
+//     User.findOne({ ip_adress: ip }).then((userInDB) => {
+//       req.user = userInDB;
+//       next();
+//     });
+//   } catch (err) {
+//     return res.status(500).send(err);
+//   }
+// });
 
 app.use("/products", productsController);
 app.use("/product", productController);
