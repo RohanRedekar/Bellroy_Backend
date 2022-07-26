@@ -4,17 +4,28 @@ app.use(express.json());
 const cors = require("cors");
 const productsController = require("./src/controllers/products.controller");
 const productController = require("./src/controllers/product.controller");
+const register = require("./src/controllers/user.controller");
+const {
+  addToCart,
+  getCart,
+  deleteInCart,
+} = require("./src/controllers/cart.controller");
 
 app.use(cors());
+
 app.get("", (req, res) => {
-    try {
-        res.send("homepage");
-    } catch (error) {
-        res.send(error);
-    }
+  try {
+    res.send("homepage");
+  } catch (error) {
+    res.send(error);
+  }
 });
 
 app.use("/products", productsController);
-app.use("/product", productController)
+app.use("/product", productController);
+app.use("/register", register);
+app.use("/add-to-cart", addToCart);
+app.use("/get-cart", getCart);
+app.use("/delete-in-cart", deleteInCart);
 
 module.exports = app;
