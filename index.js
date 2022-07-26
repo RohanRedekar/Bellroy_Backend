@@ -23,13 +23,15 @@ app.get("", (req, res) => {
 });
 
 app.use((req, res, next) => {
-  const ip = req.ip;
-  User.findOne({ ip_adress: ip })
-    .then((userInDB) => {
+  try {
+    const ip = req.ip;
+    User.findOne({ ip_adress: ip }).then((userInDB) => {
       req.user = userInDB;
       next();
-    })
-    .catch((err) => console.log(err));
+    });
+  } catch (err) {
+    return res.status(500).send(err);
+  }
 });
 
 app.use("/products", productsController);
