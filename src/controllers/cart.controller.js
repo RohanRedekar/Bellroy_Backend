@@ -2,8 +2,8 @@ const User = require("../models/user.model");
 
 const addToCart = (req, res, next) => {
   const ip = new String(req.ip);
-  const user = User.findOne({ ip_adress: ip }).lean().exec();
-  return res.status(201).send(user);
+  return res.status(201).send(ip);
+  // const user = User.findOne({ ip_adress: ip }).lean().exec();
   // .then((dbUser) => {
   //   dbUser.addToCart(req.body.id);
   // })
