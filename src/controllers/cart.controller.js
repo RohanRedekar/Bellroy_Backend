@@ -35,13 +35,14 @@ const Product = require("../models/product.model");
 const fetchCart = async (req, res, next) => {
   const payload = req.query.payload;
   let data = [];
-  for (let i = 0; i < payload.length; i++) {
-    let { id, count } = JSON.parse(payload[i]);
-    let res = await Product.findOne({ _id: id }).lean().exec();
-    res.count = count;
-    data.push(res);
+  if (payload.length > 0) {
+    for (let i = 0; i < payload.length; i++) {
+      let { id, count } = JSON.parse(payload[i]);
+      let res = await Product.findOne({ _id: id }).lean().exec();
+      res.count = count;
+      data.push(res);
+    }
   }
-  console.log(data);
   return res.status(201).send(data);
 };
 
