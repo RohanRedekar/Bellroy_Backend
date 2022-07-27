@@ -46,8 +46,7 @@ const fetchCart = async (req, res, next) => {
        data.push(res);
      }
    }
-   console.log(payload);
-   return res.status(201).send(payload);
+   return res.status(201).send(data);
 };
 
 module.exports = fetchCart;
