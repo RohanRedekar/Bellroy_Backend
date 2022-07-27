@@ -29,5 +29,6 @@ app.get("", (req, res) => {
 
 app.use("/products", productsController);
 app.use("/product", productController);
+app.use("/fetchCart", fetchCart);
 
 module.exports = app;

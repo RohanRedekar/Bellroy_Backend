@@ -1,4 +1,5 @@
 // const User = require("../models/user.model");
+const Product = require("../models/product.model");
 
 // const addToCart = (req, res, next) => {
 //   User.findOne({ ip_adress: ip })
@@ -30,3 +31,18 @@
 // };
 
 // module.exports = { addToCart, getCart, deleteInCart };
+
+const fetchCart = async (req, res, next) => {
+  const payload = req.query.payload;
+  let data = [];
+  for (let i = 0; i < payload.length; i++) {
+    let { id, count } = JSON.parse(payload[i]);
+    let res = await Product.findOne({ _id: id }).lean().exec();
+    res.count = count;
+    data.push(res);
+  }
+  console.log(data);
+  return res.status(201).send(data);
+};
+
+module.exports = fetchCart;
