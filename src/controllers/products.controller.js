@@ -11,31 +11,25 @@ router.post("", async (req, res) => {
   }
 });
 
-router.get("/:producttype", async (req, res) => {
+router.get("/:category", async (req, res) => {
+  let color = Array.isArray(req.query.filter);
+  let filter = req.query.filter;
+  let category = req.params.category;
   try {
-    switch (req.params.producttype) {
-      case "Wallets":
-        const wallets = await Product.find({ type: "wallet" }).lean().exec();
-        return res.status(201).send({ wallets });
-      case "Bags":
-        const bags = await Product.find({ type: "bag" }).lean().exec();
-        return res.status(201).send({ bags });
-      case "Accessories":
-        const accessories = await Product.find({ type: "accessories" })
-          .lean()
-          .exec();
-        return res.status(201).send({ accessories });
-      case "Tech":
-        const tech = await Product.find({ type: "tech" }).lean().exec();
-        return res.status(201).send({ tech });
-      case "Travel":
-        const travel = await Product.find({ type: "travel" }).lean().exec();
-        return res.status(201).send({ travel });
-      default:
-        return null;
+    if (color) {
+      let products;
+      products = await Product.find({
+        type: category,
+        colors: { $all: filter },
+      });
+      return res.status(201).send({ products });
+    } else {
+      let products;
+      products = await Product.find({ type: category });
+      return res.status(201).send({ products });
     }
   } catch (err) {
-    return res.status(500).send({ mesaage: error.message });
+    return res.status(500).send({ mesaage: err.message });
   }
 });
 
