@@ -43,7 +43,8 @@ const fetchCart = async (req, res, next) => {
       let { id, count, color } = JSON.parse(payload[i]);
       let res = await Product.findOne({ _id: id }).lean().exec();
       for (let j = 0; j < res.colors.length; j++) {
-        if (color === res.colors[i]) res.imgIndex = i;
+        if (color === res.colors[i]) res.imgIndex = j;
+        console.log("No match found");
       }
       res.count = count;
       data.push(res);
