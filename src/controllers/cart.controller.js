@@ -33,20 +33,23 @@ const Product = require("../models/product.model");
 // module.exports = { addToCart, getCart, deleteInCart };
 
 const fetchCart = async (req, res, next) => {
-   const payload = req.query.payload;
-   if (payload === undefined) {
-     return res.status(201).send([]);
-   }
-   let data = [];
-   if (payload.length > 0) {
-     for (let i = 0; i < payload.length; i++) {
-       let { id, count } = JSON.parse(payload[i]);
-       let res = await Product.findOne({ _id: id }).lean().exec();
-       res.count = count;
-       data.push(res);
-     }
-   }
-   return res.status(201).send(data);
+  const payload = req.query.payload;
+  if (payload === undefined) {
+    return res.status(201).send([]);
+  }
+  let data = [];
+  if (payload.length > 0) {
+    for (let i = 0; i < payload.length; i++) {
+      let { id, count, color } = JSON.parse(payload[i]);
+      let res = await Product.findOne({ _id: id }).lean().exec();
+      for (let j = 0; j < res.colors.length; j++) {
+        if (color === res.colors[i]) res.imgIndex = i;
+      }
+      res.count = count;
+      data.push(res);
+    }
+  }
+  return res.status(201).send(data);
 };
 
 module.exports = fetchCart;
