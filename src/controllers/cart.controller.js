@@ -43,6 +43,7 @@ const fetchCart = async (req, res, next) => {
       let { id, count, color } = JSON.parse(payload[i]);
       let res = await Product.findOne({ _id: id }).lean().exec();
       for (let j = 0; j < res.colors.length; j++) {
+        // check which coloured product is added to the cart
         if (color === res.colors[j]) res.imgIndex = j;
       }
       res.count = count;

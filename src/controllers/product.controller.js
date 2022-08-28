@@ -4,7 +4,7 @@ const Product = require("../models/product.model");
 
 router.get("/:title", async (req, res) => {
   try {
-    const title = req.params.title.split("-").join(" ");
+    const title = req.params.title.split("-").join(" "); //folio-mini => folio mini
     const wallet = await Product.find({ title: title });
     return res.status(201).send(wallet);
   } catch (err) {
